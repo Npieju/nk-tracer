@@ -1,0 +1,32 @@
+{
+  "name": "Python Dev Env",
+  // 使用するdocker-compose.ymlファイルを指定
+  "dockerComposeFile": "../docker-compose.yml",
+
+  // docker-compose.yml内のどのサービスを開発コンテナとして使うか指定
+  "service": "app",
+
+  // VS Codeで開くコンテナ内のワークスペースパス
+  "workspaceFolder": "/workspace",
+
+  // VS Codeの設定や拡張機能のカスタマイズ
+  "customizations": {
+    "vscode": {
+      // コンテナ内で自動的に有効化するVS Code拡張機能
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "njpwerner.autodocstring"
+      ],
+      // コンテナ内でのVS Codeの設定
+      "settings": {
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  },
+
+  // (任意) コンテナ作成後に一度だけ実行されるコマンド
+  // プロジェクトで使うライブラリを自動インストールする場合などに使います
+  // "postCreateCommand": "pip install -r requirements.txt"
+}
