@@ -43,6 +43,13 @@ def _write_single_result(result: dict, output_path: Path, csv_dir: Path | None, 
         for file_path in written_files:
             print(f"saved: {file_path}")
 
+    odds_status = result.get("odds_status", {})
+    for bet_type, status in odds_status.items():
+        status_value = status.get("status", "unknown") if isinstance(status, dict) else "unknown"
+        rows = status.get("rows", 0) if isinstance(status, dict) else 0
+        message = status.get("message", "") if isinstance(status, dict) else ""
+        print(f"odds_status[{bet_type}]: {status_value} rows={rows} {message}")
+
 
 def main() -> None:
     parser = build_parser()

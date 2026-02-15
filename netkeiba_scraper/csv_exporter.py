@@ -4,8 +4,22 @@ import csv
 from pathlib import Path
 
 
+CSV_FILE_ALIASES = {
+    "単勝": "win",
+    "複勝": "place",
+    "枠連": "bracket_quinella",
+    "馬連": "quinella",
+    "ワイド": "quinella_place",
+    "馬単": "exacta",
+    "三連複": "trio",
+    "三連単": "trifecta",
+}
+
+
 def _safe_file_name(name: str) -> str:
-    return name.replace("/", "_")
+    if name in CSV_FILE_ALIASES:
+        return CSV_FILE_ALIASES[name]
+    return name.replace("/", "_").replace(" ", "_").lower()
 
 
 def write_odds_csv_files(odds_data: dict[str, list[dict[str, str]]], output_dir: Path) -> list[Path]:
